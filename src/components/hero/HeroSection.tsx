@@ -83,7 +83,7 @@ export function HeroSection() {
   )
 
   useEffect(() => {
-    ScrollTrigger.create({
+    const st = ScrollTrigger.create({
       trigger: '#hero',
       start: 'top top',
       end: 'bottom top',
@@ -93,6 +93,8 @@ export function HeroSection() {
         window.dispatchEvent(event)
       },
     })
+
+    return () => { st.kill() }
   }, [])
 
   return (
