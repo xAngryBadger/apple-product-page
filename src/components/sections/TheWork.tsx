@@ -13,19 +13,27 @@ function ProjectCard({ project }: { project: Project }) {
       href={project.github}
       target="_blank"
       rel="noopener noreferrer"
-      className="work-card gpu group block overflow-hidden rounded-2xl border transition-colors"
+      className="work-card gpu group block overflow-hidden rounded-2xl border transition-all duration-300"
       style={{
         borderColor: 'var(--color-bg)',
         background: 'var(--color-bg-alt)',
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.borderColor = `${project.accent}44`
+        e.currentTarget.style.boxShadow = `0 0 40px ${project.accent}0a, 0 8px 32px rgba(0,0,0,0.3)`
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.borderColor = 'var(--color-bg)'
+        e.currentTarget.style.boxShadow = 'none'
       }}
     >
       <div className="p-6 md:p-8">
         <div
           className="mb-4 inline-block rounded-full px-3 py-1 font-mono text-xs uppercase tracking-wider"
           style={{
-            background: 'rgba(168, 97, 26, 0.1)',
-            color: 'var(--color-accent)',
-            border: '1px solid rgba(168, 97, 26, 0.2)',
+            background: `${project.accent}1a`,
+            color: project.accent,
+            border: `1px solid ${project.accent}33`,
           }}
         >
           {project.tech}
@@ -41,9 +49,9 @@ function ProjectCard({ project }: { project: Project }) {
         </p>
         <div
           className="mt-6 flex items-center gap-2 font-mono text-xs uppercase tracking-wider"
-          style={{ color: 'var(--color-accent)' }}
+          style={{ color: project.accent }}
         >
-          <span>View on GitHub</span>
+          <span>View project</span>
           <span className="inline-block transition-transform group-hover:translate-x-1">
             &rarr;
           </span>
@@ -128,7 +136,11 @@ export function TheWork() {
       className="section-pin relative flex h-screen w-full flex-col items-center justify-center overflow-hidden"
       style={{ background: 'var(--color-bg-alt)' }}
     >
-      <div className="mx-auto w-full max-w-5xl px-6">
+      <div className="ambient-mesh">
+        <div className="ambient-orb work-glow" />
+      </div>
+
+      <div className="relative z-10 mx-auto w-full max-w-5xl px-6">
         <h2
           className="work-headline mb-12 text-center font-bold leading-tight tracking-tight"
           style={{
@@ -139,7 +151,7 @@ export function TheWork() {
           The Work
         </h2>
 
-        <div className="grid gap-4 md:grid-cols-2 md:gap-6">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 md:gap-5">
           {WORK.map((project) => (
             <ProjectCard key={project.title} project={project} />
           ))}

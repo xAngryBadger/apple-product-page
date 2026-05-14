@@ -106,6 +106,11 @@ export function HeroSection() {
     >
       <HeroCanvas />
 
+      <div className="ambient-mesh">
+        <div className="ambient-orb hero-glow-1" />
+        <div className="ambient-orb hero-glow-2" />
+      </div>
+
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-6">
         <SplitHeadline
           as="h1"

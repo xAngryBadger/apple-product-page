@@ -8,6 +8,9 @@ import { TheApproach } from './components/sections/TheApproach'
 import { TheStack } from './components/sections/TheStack'
 import { TheWork } from './components/sections/TheWork'
 import { TheImpact } from './components/sections/TheImpact'
+import { CustomCursor } from './components/ui/CustomCursor'
+import { NoiseOverlay } from './components/ui/NoiseOverlay'
+import { ScrollProgress } from './components/ui/ScrollProgress'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -47,6 +50,9 @@ export default function App() {
       options={{ lerp: 0.1, smoothWheel: true, autoRaf: false }}
     >
       <ScrollProxy />
+      <CustomCursor />
+      <ScrollProgress />
+      <NoiseOverlay />
       <main className="relative" style={{ background: 'var(--color-bg)' }}>
         <HeroSection />
         <TheApproach />

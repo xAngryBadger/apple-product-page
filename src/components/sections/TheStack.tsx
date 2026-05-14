@@ -138,7 +138,11 @@ export function TheStack() {
       className="section-pin relative flex h-screen w-full flex-col items-center justify-center overflow-hidden"
       style={{ background: 'var(--color-bg)' }}
     >
-      <div className="mx-auto w-full max-w-5xl px-6">
+      <div className="ambient-mesh">
+        <div className="ambient-orb stack-glow" />
+      </div>
+
+      <div className="relative z-10 mx-auto w-full max-w-5xl px-6">
         <h2
           ref={headlineRef}
           className="mb-16 text-center font-bold leading-tight tracking-tight"
@@ -151,7 +155,7 @@ export function TheStack() {
           The Stack
         </h2>
 
-        <div className="grid grid-cols-3 gap-3 md:grid-cols-5 md:gap-4">
+        <div className="grid grid-cols-3 gap-3 md:grid-cols-5 lg:grid-cols-5 md:gap-4">
           {STACK.map((skill) => (
             <SkillIcon key={skill.name} skill={skill} />
           ))}

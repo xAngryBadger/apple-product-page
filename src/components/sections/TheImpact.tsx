@@ -121,7 +121,11 @@ export function TheImpact() {
       className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden"
       style={{ background: 'var(--color-bg)' }}
     >
-      <div className="mx-auto w-full max-w-4xl px-6 py-24">
+      <div className="ambient-mesh">
+        <div className="ambient-orb impact-glow" />
+      </div>
+
+      <div className="relative z-10 mx-auto w-full max-w-4xl px-6 py-24">
         <h2
           className="mb-16 text-center font-bold leading-tight tracking-tight"
           style={{

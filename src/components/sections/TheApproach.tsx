@@ -84,7 +84,11 @@ export function TheApproach() {
       className="section-pin relative flex h-screen w-full items-center justify-center overflow-hidden"
       style={{ background: 'var(--color-bg-alt)' }}
     >
-      <div className="mx-auto max-w-4xl px-6 text-center">
+      <div className="ambient-mesh">
+        <div className="ambient-orb approach-glow" />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
         <SplitHeadline
           as="h2"
           className="mb-12 text-center font-bold leading-tight tracking-tight"
