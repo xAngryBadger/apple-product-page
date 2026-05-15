@@ -7,56 +7,54 @@ import type { Project } from '../../lib/content'
 
 gsap.registerPlugin(ScrollTrigger)
 
-function ProjectCard({ project }: { project: Project }) {
+function ProjectCard({ project, index }: { project: Project; index: number }) {
+  const num = String(index + 1).padStart(2, '0')
+
   return (
     <a
       href={project.github}
       target="_blank"
       rel="noopener noreferrer"
-      className="work-card gpu group block flex-shrink-0 overflow-hidden rounded-2xl border transition-all duration-300"
+      className="work-card gpu group block flex-shrink-0 transition-all duration-300"
       style={{
         width: 'clamp(280px, 30vw, 420px)',
-        borderColor: 'var(--color-bg)',
-        background: 'rgba(17, 17, 17, 0.7)',
-        backdropFilter: 'blur(12px)',
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.borderColor = `${project.accent}44`
-        e.currentTarget.style.boxShadow = `0 0 40px ${project.accent}0a, 0 8px 32px rgba(0,0,0,0.3)`
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.borderColor = 'var(--color-bg)'
-        e.currentTarget.style.boxShadow = 'none'
       }}
     >
-      <div className="p-6 md:p-8">
+      <div
+        className="relative h-full border-b py-8 pl-6 pr-6"
+        style={{ borderColor: 'rgba(255,255,255,0.06)' }}
+      >
         <div
-          className="mb-4 inline-block rounded-full px-3 py-1 font-mono text-xs uppercase tracking-wider"
-          style={{
-            background: `${project.accent}1a`,
-            color: project.accent,
-            border: `1px solid ${project.accent}33`,
-          }}
+          className="work-card-accent absolute left-0 top-0 h-full w-[3px] origin-top scale-y-0 transition-transform duration-500"
+          style={{ background: project.accent }}
+        />
+        <span
+          className="mb-4 block font-mono text-3xl font-extrabold leading-none md:text-4xl"
+          style={{ color: 'rgba(255,255,255,0.06)' }}
         >
-          {project.tech}
-        </div>
+          {num}
+        </span>
         <h3
-          className="mb-3 text-xl font-bold tracking-tight md:text-2xl"
+          className="mb-2 text-xl font-bold tracking-tight md:text-2xl"
           style={{ color: 'var(--color-text)' }}
         >
           {project.title}
         </h3>
+        <p
+          className="mb-4 font-mono text-xs uppercase tracking-[0.15em]"
+          style={{ color: project.accent }}
+        >
+          {project.tech}
+        </p>
         <p className="text-sm leading-relaxed md:text-base" style={{ color: 'var(--color-text-2)' }}>
           {project.description}
         </p>
         <div
-          className="mt-6 flex items-center gap-2 font-mono text-xs uppercase tracking-wider"
-          style={{ color: project.accent }}
+          className="mt-6 flex items-center gap-2 font-mono text-xs uppercase tracking-wider transition-colors duration-300"
+          style={{ color: 'var(--color-text-3)' }}
         >
-          <span>View project</span>
-          <span className="inline-block transition-transform group-hover:translate-x-1">
-            &rarr;
-          </span>
+          <span className="group-hover:text-white">View project</span>
+          <span className="inline-block transition-transform group-hover:translate-x-1">&rarr;</span>
         </div>
       </div>
     </a>
@@ -160,16 +158,9 @@ export function TheWork() {
         </h2>
 
         <div className="overflow-hidden px-8 md:px-16">
-          <div
-            ref={trackRef}
-            className="flex gap-5 md:gap-6"
-            style={{ width: 'max-content' }}
-          >
-            {WORK.map((project) => (
-              <ProjectCard key={project.title} project={project} />
-            ))}
-            {WORK.map((project) => (
-              <ProjectCard key={`${project.title}-clone`} project={project} />
+          <div ref={trackRef} className="flex gap-5 md:gap-6" style={{ width: 'max-content' }}>
+            {WORK.map((project, i) => (
+              <ProjectCard key={project.title} project={project} index={i} />
             ))}
           </div>
         </div>
@@ -178,8 +169,8 @@ export function TheWork() {
           {WORK.map((_, i) => (
             <div
               key={i}
-              className="h-1 w-1 rounded-full"
-              style={{ background: 'var(--color-text-3)' }}
+              className="h-[2px] w-6"
+              style={{ background: 'rgba(255,255,255,0.08)' }}
             />
           ))}
         </div>

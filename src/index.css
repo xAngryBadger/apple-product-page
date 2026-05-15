@@ -67,7 +67,7 @@ a, button, [role="button"] {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 1.5px solid var(--color-accent);
+  border: 1.5px solid rgba(255,255,255,0.6);
   pointer-events: none;
   z-index: 9999;
   mix-blend-mode: difference;
@@ -78,7 +78,7 @@ a, button, [role="button"] {
 .custom-cursor.hovering {
   width: 48px;
   height: 48px;
-  border-color: var(--color-accent-light);
+  border-color: rgba(255,255,255,0.9);
 }
 
 .cursor-glow {
@@ -90,7 +90,7 @@ a, button, [role="button"] {
   border-radius: 50%;
   pointer-events: none;
   z-index: 1;
-  background: radial-gradient(circle, rgba(168, 97, 26, 0.06) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(180,200,255,0.04) 0%, transparent 70%);
   transform: translate(-50%, -50%);
 }
 
@@ -101,11 +101,31 @@ a, button, [role="button"] {
   pointer-events: none;
   opacity: 0.025;
   mix-blend-mode: overlay;
+  overflow: hidden;
 }
 
 .noise-overlay svg {
-  width: 100%;
-  height: 100%;
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  animation: noise-dist 0.8s steps(3) infinite both;
+  will-change: transform;
+}
+
+@keyframes noise-dist {
+  0% { transform: translate3d(1%, -1%, 0); }
+  10% { transform: translate3d(-5%, -2%, 0); }
+  20% { transform: translate3d(10%, 5%, 0); }
+  30% { transform: translate3d(5%, -11%, 0); }
+  40% { transform: translate3d(-12%, -5%, 0); }
+  50% { transform: translate3d(10%, 9%, 0); }
+  60% { transform: translate3d(15%, 0%, 0); }
+  70% { transform: translate3d(-10%, 8%, 0); }
+  80% { transform: translate3d(10%, 2%, 0); }
+  90% { transform: translate3d(-1%, 5%, 0); }
+  100% { transform: translate3d(0%, 8%, 0); }
 }
 
 .scroll-progress {
@@ -122,10 +142,14 @@ a, button, [role="button"] {
 .section-content {
   position: relative;
   z-index: 10;
-  background: rgba(10, 10, 10, 0.4);
-  backdrop-filter: blur(2px);
-  border-radius: 1.5rem;
+  background: rgba(5, 5, 8, 0.7);
+  border-radius: 0.25rem;
   padding: 2rem;
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+.work-card:hover .work-card-accent {
+  transform: scaleY(1);
 }
 
 .section-content-hero {
