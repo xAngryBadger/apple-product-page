@@ -51,13 +51,6 @@ export const WORK: Project[] = [
     accent: '#a8611a',
   },
   {
-    title: 'Stripe Landing',
-    description: 'Financial infrastructure showcase with WebGL aurora shader, glass morphism cards, and interactive payment demo.',
-    tech: 'React + WebGL + Tailwind',
-    github: 'https://xangrybadger.github.io/stripe-landing/',
-    accent: '#635bff',
-  },
-  {
     title: 'JSON Forge',
     description: 'JSON power tool — tree viewer, graph visualizer, diff mode, TypeScript gen, and REST client with CodeMirror 6.',
     tech: 'React + CodeMirror 6 + ReactFlow',
@@ -108,7 +101,7 @@ export interface Stat {
 }
 
 export const STATS: Stat[] = [
-  { value: 8, suffix: '', label: 'Demo Projects Shipped' },
+  { value: 7, suffix: '', label: 'Demo Projects Shipped' },
   { value: 15, suffix: '+', label: 'Technologies Mastered' },
   { value: 3, suffix: '', label: 'Desktop Apps (Tauri + Rust)' },
 ]
