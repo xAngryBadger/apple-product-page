@@ -1,10 +1,9 @@
-import { useRef, useEffect } from 'react'
+import { useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import { SplitHeadline } from '../ui/SplitHeadline'
 import { MagneticButton } from '../ui/MagneticButton'
-import { HeroCanvas } from './HeroCanvas'
 import { HERO, CTA } from '../../lib/content'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -82,35 +81,13 @@ export function HeroSection() {
     { scope: sectionRef },
   )
 
-  useEffect(() => {
-    const st = ScrollTrigger.create({
-      trigger: '#hero',
-      start: 'top top',
-      end: 'bottom top',
-      scrub: 1,
-      onUpdate: (self) => {
-        const event = new CustomEvent('hero-scroll', { detail: self.progress })
-        window.dispatchEvent(event)
-      },
-    })
-
-    return () => { st.kill() }
-  }, [])
-
   return (
     <section
       id="hero"
       ref={sectionRef}
       className="section-pin relative h-screen w-full overflow-hidden"
-      style={{ background: 'var(--color-bg)' }}
+      style={{ background: 'transparent' }}
     >
-      <HeroCanvas />
-
-      <div className="ambient-mesh">
-        <div className="ambient-orb hero-glow-1" />
-        <div className="ambient-orb hero-glow-2" />
-      </div>
-
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-6">
         <SplitHeadline
           as="h1"

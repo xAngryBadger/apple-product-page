@@ -4,13 +4,16 @@ import { ReactLenis, useLenis } from 'lenis/react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { HeroSection } from './components/hero/HeroSection'
-import { TheApproach } from './components/sections/TheApproach'
+import { CosmosTransition } from './components/sections/CosmosTransition'
 import { TheStack } from './components/sections/TheStack'
 import { TheWork } from './components/sections/TheWork'
 import { TheImpact } from './components/sections/TheImpact'
 import { CustomCursor } from './components/ui/CustomCursor'
 import { NoiseOverlay } from './components/ui/NoiseOverlay'
 import { ScrollProgress } from './components/ui/ScrollProgress'
+import { Preloader } from './components/ui/Preloader'
+import { SoundToggle } from './components/ui/SoundToggle'
+import { CosmosCanvas } from './components/cosmos/CosmosCanvas'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -43,6 +46,19 @@ export default function App() {
     }
   }, [])
 
+  useEffect(() => {
+    const st = ScrollTrigger.create({
+      trigger: document.documentElement,
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: 1,
+      onUpdate: (self) => {
+        window.dispatchEvent(new CustomEvent('cosmos-scroll', { detail: self.progress }))
+      },
+    })
+    return () => { st.kill() }
+  }, [])
+
   return (
     <ReactLenis
       ref={lenisRef}
@@ -50,16 +66,18 @@ export default function App() {
       options={{ lerp: 0.1, smoothWheel: true, autoRaf: false }}
     >
       <ScrollProxy />
+      <Preloader />
+      <CosmosCanvas />
       <CustomCursor />
       <ScrollProgress />
       <NoiseOverlay />
-      <main className="relative" style={{ background: 'var(--color-bg)' }}>
+      <SoundToggle />
+      <main className="relative" style={{ background: 'transparent' }}>
         <HeroSection />
-        <TheApproach />
+        <CosmosTransition />
         <TheStack />
         <TheWork />
         <TheImpact />
-
         <footer
           className="py-8 text-center font-mono text-xs tracking-wider"
           style={{

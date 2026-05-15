@@ -13,10 +13,12 @@ function ProjectCard({ project }: { project: Project }) {
       href={project.github}
       target="_blank"
       rel="noopener noreferrer"
-      className="work-card gpu group block overflow-hidden rounded-2xl border transition-all duration-300"
+      className="work-card gpu group block flex-shrink-0 overflow-hidden rounded-2xl border transition-all duration-300"
       style={{
+        width: 'clamp(280px, 30vw, 420px)',
         borderColor: 'var(--color-bg)',
-        background: 'var(--color-bg-alt)',
+        background: 'rgba(17, 17, 17, 0.7)',
+        backdropFilter: 'blur(12px)',
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.borderColor = `${project.accent}44`
@@ -63,16 +65,17 @@ function ProjectCard({ project }: { project: Project }) {
 
 export function TheWork() {
   const sectionRef = useRef<HTMLDivElement>(null)
+  const trackRef = useRef<HTMLDivElement>(null)
 
   useGSAP(
     () => {
-      if (!sectionRef.current) return
+      if (!sectionRef.current || !trackRef.current) return
 
-      const cards = sectionRef.current.querySelectorAll('.work-card')
       const headline = sectionRef.current.querySelector('.work-headline')
-
-      gsap.set(cards, { opacity: 0, y: 60, scale: 0.9 })
       gsap.set(headline, { opacity: 0, y: 40 })
+
+      const cards = trackRef.current.querySelectorAll('.work-card')
+      gsap.set(cards, { opacity: 0, y: 40 })
 
       ScrollTrigger.matchMedia({
         '(min-width: 768px)': () => {
@@ -82,23 +85,33 @@ export function TheWork() {
               pin: true,
               scrub: 1,
               start: 'top top',
-              end: '+=400%',
+              end: '+=500%',
               pinSpacing: true,
             },
           })
 
-          tl.to(headline, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }).to(
-            cards,
-            {
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              stagger: { each: 0.12, from: 'start' },
-              duration: 0.8,
-              ease: 'power3.out',
-            },
-            0.3,
-          )
+          tl.to(headline, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' })
+            .to(
+              cards,
+              {
+                opacity: 1,
+                y: 0,
+                stagger: 0.05,
+                duration: 0.3,
+                ease: 'power2.out',
+              },
+              0.2,
+            )
+            .to(
+              trackRef.current,
+              {
+                x: () => -(trackRef.current!.scrollWidth - window.innerWidth + 100),
+                duration: 4,
+                ease: 'none',
+              },
+              0.6,
+            )
+            .to({}, { duration: 1 })
         },
         '(max-width: 767px)': () => {
           const tl = gsap.timeline({
@@ -107,23 +120,22 @@ export function TheWork() {
               pin: true,
               scrub: 1,
               start: 'top top',
-              end: '+=200%',
+              end: '+=300%',
               pinSpacing: true,
             },
           })
 
-          tl.to(headline, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }).to(
-            cards,
-            {
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              stagger: { each: 0.08, from: 'start' },
-              duration: 0.5,
-              ease: 'power3.out',
-            },
-            0.2,
-          )
+          tl.to(headline, { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' })
+            .to(cards, { opacity: 1, y: 0, stagger: 0.03, duration: 0.2, ease: 'power2.out' }, 0.15)
+            .to(
+              trackRef.current,
+              {
+                x: () => -(trackRef.current!.scrollWidth - window.innerWidth + 40),
+                duration: 3,
+                ease: 'none',
+              },
+              0.4,
+            )
         },
       })
     },
@@ -134,13 +146,9 @@ export function TheWork() {
     <section
       ref={sectionRef}
       className="section-pin relative flex h-screen w-full flex-col items-center justify-center overflow-hidden"
-      style={{ background: 'var(--color-bg-alt)' }}
+      style={{ background: 'transparent' }}
     >
-      <div className="ambient-mesh">
-        <div className="ambient-orb work-glow" />
-      </div>
-
-      <div className="relative z-10 mx-auto w-full max-w-5xl px-6">
+      <div className="relative z-10 w-full">
         <h2
           className="work-headline mb-12 text-center font-bold leading-tight tracking-tight"
           style={{
@@ -151,17 +159,31 @@ export function TheWork() {
           The Work
         </h2>
 
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 md:gap-5">
-          {WORK.map((project) => (
-            <ProjectCard key={project.title} project={project} />
+        <div className="overflow-hidden px-8 md:px-16">
+          <div
+            ref={trackRef}
+            className="flex gap-5 md:gap-6"
+            style={{ width: 'max-content' }}
+          >
+            {WORK.map((project) => (
+              <ProjectCard key={project.title} project={project} />
+            ))}
+            {WORK.map((project) => (
+              <ProjectCard key={`${project.title}-clone`} project={project} />
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-6 flex justify-center gap-2">
+          {WORK.map((_, i) => (
+            <div
+              key={i}
+              className="h-1 w-1 rounded-full"
+              style={{ background: 'var(--color-text-3)' }}
+            />
           ))}
         </div>
       </div>
-
-      <div
-        className="pointer-events-none absolute bottom-0 left-0 right-0 h-24"
-        style={{ background: 'linear-gradient(to top, var(--color-bg-alt), transparent)' }}
-      />
     </section>
   )
 }

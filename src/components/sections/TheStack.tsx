@@ -136,13 +136,10 @@ export function TheStack() {
     <section
       ref={sectionRef}
       className="section-pin relative flex h-screen w-full flex-col items-center justify-center overflow-hidden"
-      style={{ background: 'var(--color-bg)' }}
+      style={{ background: 'transparent' }}
     >
-      <div className="ambient-mesh">
-        <div className="ambient-orb stack-glow" />
-      </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-5xl px-6">
+      <div className="section-content mx-auto w-full max-w-5xl">
         <h2
           ref={headlineRef}
           className="mb-16 text-center font-bold leading-tight tracking-tight"
@@ -161,11 +158,6 @@ export function TheStack() {
           ))}
         </div>
       </div>
-
-      <div
-        className="pointer-events-none absolute bottom-0 left-0 right-0 h-24"
-        style={{ background: 'linear-gradient(to top, var(--color-bg), transparent)' }}
-      />
     </section>
   )
 }

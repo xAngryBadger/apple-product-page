@@ -119,145 +119,20 @@ a, button, [role="button"] {
   will-change: transform;
 }
 
-.ambient-mesh {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
+.section-content {
+  position: relative;
+  z-index: 10;
+  background: rgba(10, 10, 10, 0.4);
+  backdrop-filter: blur(2px);
+  border-radius: 1.5rem;
+  padding: 2rem;
 }
 
-.ambient-orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(100px);
-  pointer-events: none;
-  will-change: transform;
+.section-content-hero {
+  position: relative;
+  z-index: 10;
 }
 
-.hero-glow-1 {
-  width: 50vw;
-  height: 50vw;
-  max-width: 600px;
-  max-height: 600px;
-  top: 10%;
-  left: -10%;
-  background: rgba(168, 97, 26, 0.08);
-  animation: orb-drift-1 12s ease-in-out infinite alternate;
-}
-
-.hero-glow-2 {
-  width: 40vw;
-  height: 40vw;
-  max-width: 500px;
-  max-height: 500px;
-  bottom: 10%;
-  right: -5%;
-  background: rgba(69, 106, 75, 0.06);
-  animation: orb-drift-2 15s ease-in-out infinite alternate;
-}
-
-.approach-glow {
-  width: 60vw;
-  height: 60vw;
-  max-width: 700px;
-  max-height: 700px;
-  top: 20%;
-  right: -15%;
-  background: rgba(168, 97, 26, 0.05);
-  animation: orb-drift-1 18s ease-in-out infinite alternate;
-}
-
-.stack-glow {
-  width: 50vw;
-  height: 50vw;
-  max-width: 600px;
-  max-height: 600px;
-  bottom: -10%;
-  left: -10%;
-  background: rgba(69, 106, 75, 0.07);
-  animation: orb-drift-2 14s ease-in-out infinite alternate;
-}
-
-.work-glow {
-  width: 45vw;
-  height: 45vw;
-  max-width: 500px;
-  max-height: 500px;
-  top: -10%;
-  right: -10%;
-  background: rgba(168, 97, 26, 0.06);
-  animation: orb-drift-1 16s ease-in-out infinite alternate;
-}
-
-.impact-glow {
-  width: 55vw;
-  height: 55vw;
-  max-width: 650px;
-  max-height: 650px;
-  bottom: 5%;
-  left: 10%;
-  background: rgba(168, 97, 26, 0.05);
-  animation: orb-drift-2 20s ease-in-out infinite alternate;
-}
-
-@keyframes orb-drift-1 {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(3%, -2%) scale(1.1); }
-}
-
-@keyframes orb-drift-2 {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(-2%, 3%) scale(1.05); }
-}
-
-.grain-texture {
-  position: fixed;
-  inset: 0;
-  z-index: 9998;
-  pointer-events: none;
-  opacity: 0.03;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  background: var(--color-bg);
-  color: var(--color-text);
-  font-family: var(--font-serif);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-body {
-  background: var(--color-bg);
-  overflow-x: hidden;
-}
-
-#root {
-  min-height: 100vh;
-  width: 100%;
-}
-
-::selection {
-  background: var(--color-accent);
-  color: var(--color-bg);
-}
-
-::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-}
-
-.section-pin {
-  contain: layout style paint;
-  will-change: transform;
-}
-
-.gpu {
-  will-change: transform;
-  transform: translateZ(0);
+.preloader-bar {
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-light));
 }
